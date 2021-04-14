@@ -3,7 +3,7 @@ const livereload = require('livereload');
 const connectLivereload = require("connect-livereload");
 const path = require("path");
 const bodyParser = require("body-parser");
-const minifyCssString = require('minify-css-string').default;
+var CleanCSS = require('clean-css');
 
 const livereloadServer = livereload.createServer();
 livereloadServer.watch(path.join(process.cwd(), 'public'));
@@ -29,7 +29,7 @@ app.get("/", (request, response) => {
 app.post("/MinifyCss", (request, response) => {
     let data = [];
     request.body.cssText.forEach(css => {
-        data.push(minifyCssString(css))
+        data.push(new CleanCSS().minify(css).styles)
     });
     response.send(data);
 })

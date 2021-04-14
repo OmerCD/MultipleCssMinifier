@@ -1,8 +1,8 @@
 let keys = [];
 let fileNames = [];
 function handleFiles(e) {
-    console.log(e.files);
-
+    keys = [];
+    fileNames = [];
     readFile(e.files, 0);
 
 
@@ -45,7 +45,8 @@ function sendRequest(keys) {
             for (let i = 0; i < arry.length; i++) {
                 download(fileNames[i], arry[i]);
             }
-
+            filename = [];
+            keys = [];
         })
         .catch(error => console.log('error', error));
 
