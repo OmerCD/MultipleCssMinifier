@@ -59,3 +59,22 @@ h1 {
 .file-input:focus {
 	outline: none;
 }
+.downloader{
+	display: flex;
+	flex-direction: row;
+}
+.downloader a{
+	text-decoration: none;
+	color: white;
+	margin: 6px;
+	padding: 16px;
+	border: 1px solid aquamarine;
+	font-size: 22px;
+	max-width: 30%;
+	min-width: 25%;
+	text-align: center;
+}
+
+.downloader a:hover{
+	background: #525252dd;
+}
