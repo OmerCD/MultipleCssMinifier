@@ -3,6 +3,8 @@ let fileNames = [];
 function handleFiles(e) {
     keys = [];
     fileNames = [];
+    document.getElementById("downloader").innerHTML = "";
+    document.getElementById("downloader").append(`Loading...`);
     readFile(e.files, 0);
 
 
@@ -38,7 +40,7 @@ function sendRequest(keys) {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:4545/MinifyCss", requestOptions)
+    fetch("/MinifyCss", requestOptions)
         .then(response => response.text())
         .then(result => {
             var arry = JSON.parse(result);
@@ -51,6 +53,7 @@ function sendRequest(keys) {
         .catch(error => console.log('error', error));
 
     function download(filename, text) {
+        document.getElementById("downloader").innerHTML = "";
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
