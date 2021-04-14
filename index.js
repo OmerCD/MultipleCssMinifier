@@ -3,7 +3,7 @@ const livereload = require('livereload');
 const connectLivereload = require("connect-livereload");
 const path = require("path");
 const bodyParser = require("body-parser");
-
+const minifyCssString = require('minify-css-string').default;
 
 const livereloadServer = livereload.createServer();
 livereloadServer.watch(path.join(process.cwd(), 'public'));
@@ -17,7 +17,7 @@ const app = express();
 app.use(connectLivereload());
 app.use(express.static("public"));
 app.use(bodyParser.json({
-    limit:"50mb"
+    limit: "50mb"
 }))
 const port = 4545;
 
@@ -26,8 +26,12 @@ app.get("/", (request, response) => {
 })
 
 
-app.post("/MinifyCss",(request, response) => {
-    console.log(request.body);
+app.post("/MinifyCss", (request, response) => {
+    let data = [];
+    request.body.cssText.forEach(css => {
+        data.push(minifyCssString(css))
+    });
+    response.send(data);
 })
 
 app.listen(port, () => {
